@@ -6767,12 +6767,12 @@ try {
     return activationFunnel() + html;
   }
 
-  // KOL ACTIVATIONS: voucher-code rerun 16-25 Oct 2026. Pack-level results are static, so they are hardcoded here like other rerun KOL tables.
+  // KOL ACTIVATIONS: voucher-code rerun 16 Oct-2 Nov 2026. Pack-level results are static, so they are hardcoded here like other rerun KOL tables.
   const kolData = {
     packs: ['OFFERATO4U', 'Rashid4U', 'Ghaneya4U', 'Moweezy4U', 'Hasan4U'],
-    sabClaim: [[111, 218, 88, 43, 45], [98, 101, 85, 80, 62], [108, 36, 30, 10, 6], [22, 75, 21, 7, 9], [0, 0, 0, 0, 1]],
-    sabRedeem: [[56, 89, 35, 16, 17], [32, 40, 40, 23, 19], [43, 10, 14, 4, 3], [11, 36, 8, 4, 5], [0, 0, 0, 0, 0]],
-    newRet: [[41, 464, 15, 198], [60, 366, 17, 137], [10, 180, 4, 70], [6, 128, 2, 62], [1, 0, 0, 0]]
+    sabClaim: [[301, 379, 193, 118, 99], [131, 126, 112, 98, 72], [174, 94, 70, 24, 24], [25, 81, 26, 7, 9], [205, 48, 49, 12, 9]],
+    sabRedeem: [[148, 206, 88, 43, 35], [56, 52, 55, 35, 25], [81, 25, 33, 10, 12], [13, 47, 10, 5, 4], [82, 25, 14, 4, 3]],
+    newRet: [[112, 978, 44, 476], [80, 459, 30, 193], [40, 346, 15, 146], [7, 141, 2, 77], [22, 301, 6, 122]]
   };
   const kolCell = (n, t) => t > 0 ? shareCell(n, t) : kmN(n);
 
@@ -6791,7 +6791,7 @@ try {
 
   const kolTotals = () => kolData.newRet.reduce((a, r) => [a[0] + r[0], a[1] + r[1], a[2] + r[2], a[3] + r[3]], [0, 0, 0, 0]);
 
-  // KOL daily vouchers (distinct users per day), aggregated from the KOL voucher-code rerun state file (16-25 Oct 2026). Redeems for recent days may rise as is_coupon_used backfills.
+  // KOL daily vouchers (distinct users per day), aggregated from the KOL voucher-code rerun state file (16-25 Oct 2026; daily series not extended to 2 Nov in this refresh). Redeems for recent days may rise as is_coupon_used backfills.
   const kolDaily = [
     { d: '2026-10-16', day: 2, claimed: 31, redeemed: 11, dodClaimed: null, dodRedeemed: null },
     { d: '2026-10-17', day: 3, claimed: 66, redeemed: 30, dodClaimed: 112.9, dodRedeemed: 172.7 },
@@ -6846,7 +6846,7 @@ try {
     return table(['KOL pack', 'Vouchers claimed', 'Vouchers redeemed'], kolData.packs.map((p, j) => {
       const [cn, ce, rn, re] = kolData.newRet[j];
       return [p, cell(cn + ce, cn, ce), cell(rn + re, rn, re)];
-    }), ['Total', cell(cN + cE, cN, cE), cell(rN + rE, rN, rE)]) + '<p class="kv-small">New = first visit on/after 18 Sep 2026 (Karnival launch); Existing = first visit before. Unattributed users are 0 in this window. Window: 16-25 Oct 2026.</p>';
+    }), ['Total', cell(cN + cE, cN, cE), cell(rN + rE, rN, rE)]) + '<p class="kv-small">New = first visit on/after 18 Sep 2026 (Karnival launch); Existing = first visit before. Unattributed users are 0 in this window. Window: 16 Oct-2 Nov 2026.</p>';
   }
 
   const nav = [
@@ -6868,7 +6868,7 @@ try {
 <div id="kv-daily" class="kv-page-section"><h2 class="kv-page-title">03. Daily Performance · DoD</h2>${sec('kv-daily-detail','Daily performance · DoD','Changes compare each day with the previous day. Share changes use percentage points; the first day has no comparison.',daily())}</div>
 <div id="kv-audience" class="kv-page-section"><h2 class="kv-page-title">04. Audiences</h2>${sec('kv-audience-detail','Customer contribution','',audience())}</div>
 <div id="kv-activation" class="kv-page-section"><h2 class="kv-page-title">05. Marketing Offline Activation</h2>${sec('kv-activation-detail','Activation response','',activation())}</div>
-<div id="kv-kol" class="kv-page-section"><h2 class="kv-page-title">06. KOL Activations</h2>${kolKpis()}${sec('kv-kol-sab','KOL voucher SAB split','KOL voucher-code rerun, 16-25 Oct 2026: claims and redeems per pack by SAB tier. Counts show the share of each pack total next to them.',kolSab())}${sec('kv-kol-newret','KOL vouchers · New vs Existing','Claims and redeems per KOL pack split by first-visit cohort.',kolNewRet())}</div>
+<div id="kv-kol" class="kv-page-section"><h2 class="kv-page-title">06. KOL Activations</h2>${kolKpis()}${sec('kv-kol-sab','KOL voucher SAB split','KOL voucher-code rerun, 16 Oct-2 Nov 2026: claims and redeems per pack by SAB tier. SAB snapshot dt=20261102. Counts show the share of each pack total next to them.',kolSab())}${sec('kv-kol-newret','KOL vouchers · New vs Existing','Claims and redeems per KOL pack split by first-visit cohort.',kolNewRet())}</div>
 `;
     vbind();
   };
